@@ -1,0 +1,32 @@
+[
+    {
+        "nomMatiere": "Base de Donnée",
+        "imageMatiere": "bdd.png",
+        "photoProf": "prof1.png"
+    },
+    {
+        "nomMatiere": "Technologies Web",
+        "imageMatiere": "technoweb.png",
+        "photoProf": "prof2.png"
+    },
+    {
+        "nomMatiere": "Grails",
+        "imageMatiere": "grails.png",
+        "photoProf": "prof3.png"
+    },
+    {
+        "nomMatiere": "Clustering",
+        "imageMatiere": "clustering.png",
+        "photoProf": "prof4.png"
+    },
+    {
+        "nomMatiere": "Gestion de Projet",
+        "imageMatiere": "projet.png",
+        "photoProf": "prof5.png"
+    },
+    {
+        "nomMatiere": "Manipulation 3D",
+        "imageMatiere": "3d.png",
+        "photoProf": "prof6.png"
+    }
+]

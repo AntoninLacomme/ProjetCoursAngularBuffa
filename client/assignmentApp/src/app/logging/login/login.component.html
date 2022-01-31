@@ -1,0 +1,13 @@
+<main>
+    <form ngForm class="form">
+        <mat-form-field>
+          <input matInput placeholder="Pseudo" [(ngModel)]="pseudo" name="pseudo" value="pseudo">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Password" [(ngModel)]="password" name="password" value="password">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="login()">
+            Se connecter
+        </button>
+      </form>
+</main>

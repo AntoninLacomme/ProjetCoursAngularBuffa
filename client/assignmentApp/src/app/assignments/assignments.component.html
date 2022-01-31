@@ -1,0 +1,77 @@
+<main class="container">
+  <div class="ajouterBtn">
+    <a routerLink="/add" class="ajouterBtn">
+      <button mat-flat-button color="accent">Add Assignment</button>
+    </a>
+    <button mat-flat-button color="accent" (click)="peuplerBD()">Peupler la BDD</button>
+  </div>
+  <div class="full-container">
+    <div class="main-container" 
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="assignmentsNonRendus"
+      [cdkDropListConnectedTo]="[doneList]"
+      (cdkDropListDropped)="drop($event)">
+      <h3>Devoirs non rendus</h3>
+      <mat-list class="container-assignment" *ngFor="let assignment of assignmentsNonRendus" cdkDrag>
+        <div class="div-container-assignment">
+          <mat-card-title class="matiere-assignment flex-assignment">
+            <div><img class="icon" src="./assets/pictures/{{assignment.imageMatiere}}" alt=""></div>
+            <div>{{assignment.nomMatiere}}</div>
+            <div><img class="icon" src="./assets/pictures/{{assignment.photoProf}}" alt=""></div>
+          </mat-card-title>
+
+          <div class="author-assignment flex-assignment">
+            <div>{{assignment.author}}</div>
+          </div>
+
+          <div class="">
+            <div *ngIf="!assignment.rendu">
+              <div class="assignment-soumission">En attente de soumission</div>
+            </div>
+          </div>
+
+          <div>            
+          <a routerLink="/assignment/{{assignment.id}}">
+            <button mat-flat-button color="accent">Visualiser</button>
+          </a>
+          </div>
+        </div>
+      </mat-list>
+    </div>
+
+    <div class="main-container"
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="assignmentsRendus"
+      [cdkDropListConnectedTo]="[todoList]"
+      (cdkDropListDropped)="drop($event)">
+      <h3>Devoirs rendus</h3>
+      <mat-list class="container-assignment" *ngFor="let assignment of assignmentsRendus" cdkDrag>
+        <div class="div-container-assignment">
+          <mat-card-title class="matiere-assignment flex-assignment">
+            <div><img class="icon" src="./assets/pictures/{{assignment.imageMatiere}}" alt=""></div>
+            <div>{{assignment.nomMatiere}}</div>
+            <div><img class="icon" src="./assets/pictures/{{assignment.photoProf}}" alt=""></div>
+          </mat-card-title>
+
+          <div class="author-assignment flex-assignment">
+            <div>{{assignment.author}}</div>
+          </div>
+
+          <div class="">
+            <div *ngIf="!assignment.rendu">
+              <div class="assignment-soumission">En attente de soumission</div>
+            </div>
+          </div>
+
+          <div>            
+          <a routerLink="/assignment/{{assignment.id}}">
+            <button mat-flat-button color="accent">Visualiser</button>
+          </a>
+          </div>
+        </div>
+      </mat-list>
+    </div>
+  </div>
+</main>

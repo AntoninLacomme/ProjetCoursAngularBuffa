@@ -1,0 +1,35 @@
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+img.icon {
+    width: 80px;
+    height: 80px;
+}
+
+.flex-assignment {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.assignment-note-detail {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.color-black {
+    color: black
+}
+
+.color-red {
+    color: red
+}
+
+.color-green {
+    color: green
+}

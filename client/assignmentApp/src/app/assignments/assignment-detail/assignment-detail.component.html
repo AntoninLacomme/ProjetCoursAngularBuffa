@@ -1,0 +1,43 @@
+<div class="container" *ngIf="assignmentTransmis">
+    <mat-card>
+        <mat-card-title class="matiere-assignment flex-assignment">
+            <div><img mat-card-image class="icon" src="./assets/pictures/{{assignmentTransmis.imageMatiere}}" alt=""></div>
+            <mat-card>{{assignmentTransmis.nomMatiere}}</mat-card>
+            <div><img mat-card-image class="icon" src="./assets/pictures/{{assignmentTransmis.photoProf}}" alt=""></div>
+        </mat-card-title>
+        <mat-card-subtitle class="flex-assignment">
+            <mat-card>{{assignmentTransmis.dateDeRendu | date}}</mat-card>
+            <mat-card>{{assignmentTransmis.author}}</mat-card>
+        </mat-card-subtitle>
+
+        <mat-card class="assignment-note-detail">
+            <div>{{assignmentTransmis.remarque}}</div>
+            <div class="color-green" *ngIf="assignmentTransmis.note >= 10; else badnote">{{assignmentTransmis.note}} / 20</div>
+            <ng-template #badnote>
+                <div class="color-red">{{assignmentTransmis.note}} / 20</div>
+            </ng-template>
+        </mat-card>
+
+
+
+        <mat-card-actions class="bottom">
+            <mat-checkbox 
+            *ngIf="!assignmentTransmis.rendu"
+                (click) = "onAssignmentRendu ()"
+                >Rendu</mat-checkbox>
+                <nav>
+                    <a [routerLink]="['/assignment', assignmentTransmis.id, 'edit']">
+                        <button (click)="onClickEdit()" mat-stroked-button color="primary" [disabled]="isAdmin()">EDIT</button>
+                    </a>
+                </nav>
+
+            <button
+                mat-raised-button
+                color="warn"
+                (click) = "onDelete ()"
+            >
+                Supprimer
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

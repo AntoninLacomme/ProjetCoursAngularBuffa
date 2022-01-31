@@ -1,0 +1,24 @@
+<form ngForm #assignmentForm class="form" 
+    (submit)="onSubmit($event); assignmentForm.reset()">
+    <mat-form-field>
+        <input 
+            matInput 
+            #nomAssignment 
+            [(ngModel)]="newDevoir.nom" 
+            name="nom" 
+            required
+            placeholder="Nom du Devoir">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Date de Rendu</mat-label>
+            <input [(ngModel)]="newDevoir.dateDeRendu" name="dateDeRendu" matInput [matDatepicker]="picker" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+    <button 
+        mat-stroked-button 
+        color="primary"
+    >Ajouter un devoir</button>
+</form>
