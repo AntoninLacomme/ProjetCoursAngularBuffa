@@ -13,9 +13,10 @@
         [cdkDropListData]="assignmentsNonRendus"
         [cdkDropListConnectedTo]="[doneList]"
         (cdkDropListDropped)="drop($event)"
+        [cdkDropListEnterPredicate]="dragRightToLeft"
         #containerNonRendu>
         <h3>Devoirs non rendus</h3>
-        <mat-list class="container-assignment" *ngFor="let assignment of assignmentsNonRendus" cdkDrag>
+        <mat-list class="container-assignment" *ngFor="let assignment of assignmentsNonRendus" cdkDrag [cdkDragData]="assignment">
           <div class="div-container-assignment">
             <mat-card-title class="matiere-assignment flex-assignment">
               <div><img class="icon" src="./assets/pictures/{{assignment.imageMatiere}}" alt=""></div>
@@ -48,9 +49,10 @@
         [cdkDropListData]="assignmentsRendus"
         [cdkDropListConnectedTo]="[todoList]"
         (cdkDropListDropped)="drop($event)"
+        [cdkDropListEnterPredicate]="dragLeftToRight"
         #containerRendu>
         <h3>Devoirs rendus</h3>
-        <mat-list class="container-assignment" *ngFor="let assignment of assignmentsRendus" cdkDrag>
+        <mat-list class="container-assignment" *ngFor="let assignment of assignmentsRendus" cdkDrag [cdkDragData]="assignment">
           <div class="div-container-assignment">
             <mat-card-title class="matiere-assignment flex-assignment">
               <div><img class="icon" src="./assets/pictures/{{assignment.imageMatiere}}" alt=""></div>

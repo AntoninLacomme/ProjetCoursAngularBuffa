@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignment.model';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { HostListener } from '@angular/core';
 import { NumberInput } from '@angular/cdk/coercion';
 
@@ -55,7 +55,7 @@ export class AssignmentsComponent implements OnInit {
 	addNewAssignments (): void {
 		this.assigmentsService.nextAssignments (25, 0)
 		.subscribe (assignments => {
-			//this.assignments = [...this.assignments, ...assignments]
+			this.assignments = assignments;
 			if (assignments.length > 0) {
 				assignments.forEach (assignment => {
 					assignment.rendu ?
@@ -103,14 +103,19 @@ export class AssignmentsComponent implements OnInit {
 	}
 */
 	onDropAssignment (event: Assignment) {
-		console.log (event)
 		if (event != undefined) {
 			this.assignments.splice (this.assignments.indexOf (event), 1)
 		}
 	}
 
 	drop(event: CdkDragDrop<Assignment[]>) {
-		console.log (event)
+		this.assignments.forEach (assignment => {
+			if (assignment.id === event.item.data.id) {
+				assignment.rendu = !assignment.rendu;
+				this.assigmentsService.updateAssignment (assignment)
+					.subscribe ();
+			}
+		})
 		if (event.previousContainer === event.container) {
 		  	moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
 		} else {
@@ -121,6 +126,14 @@ export class AssignmentsComponent implements OnInit {
 				event.currentIndex,
 			);
 		}
+	}
+
+	dragLeftToRight(item: CdkDrag<Assignment>) {
+		return item.data.note !== null;
+	}
+
+	dragRightToLeft(item: CdkDrag<Assignment>) {
+		return !item.data.rendu;
 	}
 
 }
