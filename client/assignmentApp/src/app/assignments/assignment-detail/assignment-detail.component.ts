@@ -49,7 +49,7 @@ export class AssignmentDetailComponent implements OnInit {
     if (this.assignmentTransmis){
       this.assignmentService.deleteAssignment (this.assignmentTransmis)
         .subscribe (message => {
-          //this.dropAssignment.emit (this.assignmentTransmis)
+          this.dropAssignment.emit (this.assignmentTransmis)
           this.assignmentTransmis = undefined
           console.log (message)
           this.router.navigate (["/home"])

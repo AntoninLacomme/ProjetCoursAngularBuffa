@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  loggedIn = true;
+  loggedIn = false;
   pseudo? : String;
 
   constructor(private router:Router,

@@ -110,7 +110,8 @@ export class AssignmentsComponent implements OnInit {
 
 	drop(event: CdkDragDrop<Assignment[]>) {
 		this.assignments.forEach (assignment => {
-			if (assignment.id === event.item.data.id) {
+			if (assignment.id === event.item.data.id && event.item.data.note !== null) {
+				console.log ("----")
 				assignment.rendu = !assignment.rendu;
 				this.assigmentsService.updateAssignment (assignment)
 					.subscribe ();
@@ -133,7 +134,7 @@ export class AssignmentsComponent implements OnInit {
 	}
 
 	dragRightToLeft(item: CdkDrag<Assignment>) {
-		return !item.data.rendu;
+		return item.data.note === null;
 	}
 
 }

@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Assignment } from '../assignment.model';
 import { AuthService } from 'src/app/shared/auth.service';
+import { Matiere } from '../matiere.model';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-edit-assignment',
@@ -14,48 +16,20 @@ export class EditAssignmentComponent implements OnInit {
   nomAssignment?: string;
   dateDeRendu?: Date;
   
-  matieres = [
-    {
-        "nomMatiere": "Base de Donnée",
-        "imageMatiere": "bdd.png",
-        "photoProf": "prof1.jpg"
-    },
-    {
-        "nomMatiere": "Technologies Web",
-        "imageMatiere": "technoweb.png",
-        "photoProf": "prof2.jpg"
-    },
-    {
-        "nomMatiere": "Grails",
-        "imageMatiere": "grails.png",
-        "photoProf": "prof3.jpg"
-    },
-    {
-        "nomMatiere": "Clustering",
-        "imageMatiere": "clustering.jpg",
-        "photoProf": "prof4.jpg"
-    },
-    {
-        "nomMatiere": "Gestion de Projet",
-        "imageMatiere": "projet.png",
-        "photoProf": "prof5.jpg"
-    },
-    {
-        "nomMatiere": "Manipulation 3D",
-        "imageMatiere": "3d.jpg",
-        "photoProf": "prof6.jpg"
-    }
-];
+  matieres?: Matiere[];
 
   constructor(private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService) { }
+    private authService: AuthService) { 
+      this.assignmentsService.getMatieres().pipe(take(1)).subscribe(matieres => this.matieres = matieres);
+    }
 
   ngOnInit(): void {
     this.getAssignment();
 
     this.authService.logging ();
+    
   }
   getAssignment() {
     // on récupère l'id dans le snapshot passé par le routeur
@@ -78,7 +52,7 @@ export class EditAssignmentComponent implements OnInit {
         .subscribe(message => {
           console.log(message);
 
-          this.router.navigate (["/home"])
+          // this.router.navigate (["/home"])
         });
 
       // navigation vers la home page
