@@ -1,24 +1,32 @@
-<form ngForm #assignmentForm class="form" 
-    (submit)="onSubmit($event); assignmentForm.reset()">
-    <mat-form-field>
-        <input 
-            matInput 
-            #nomAssignment 
-            [(ngModel)]="newDevoir.nom" 
-            name="nom" 
-            required
-            placeholder="Nom du Devoir">
+<div class="container" *ngIf="assignment">
+    <h1>Création d'un nouvel assignment</h1>
+    <form ngForm class="form">
+        <mat-form-field>
+          <input matInput placeholder="Nom" [(ngModel)]="assignment.nom" name="nom">
         </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>Date de Rendu</mat-label>
-            <input [(ngModel)]="newDevoir.dateDeRendu" name="dateDeRendu" matInput [matDatepicker]="picker" required>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+        <mat-form-field>
+          <input matInput placeholder="Note" [(ngModel)]="assignment.note" name="note">
         </mat-form-field>
-
-    <button 
-        mat-stroked-button 
-        color="primary"
-    >Ajouter un devoir</button>
-</form>
+      <mat-form-field>
+        <input matInput placeholder="Commentaire" [(ngModel)]="assignment.remarque" name="remarque">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Auteur" [(ngModel)]="assignment.author" name="author">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Date de Rendu" [(ngModel)]="assignment.dateDeRendu" name="date">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field *ngIf="matieres">
+        <mat-select [(ngModel)]="matiere" name="matiere">
+          <mat-option *ngFor="let mat of matieres" [value]="mat">{{mat.nomMatiere}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="onSubmit()">
+        Sauver
+      </button>
+    </form>
+  </div>
+  

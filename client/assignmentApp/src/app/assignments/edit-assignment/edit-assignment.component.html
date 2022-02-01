@@ -2,10 +2,10 @@
   <h1>Edition de l'assignment de {{assignment.nom}}</h1>
   <form ngForm class="form">
     <mat-form-field>
-      <input matInput placeholder="Modifier la note" [(ngModel)]="assignment.note" name="note" value="nomAssignment">
+      <input matInput placeholder="Modifier la note" [(ngModel)]="assignment.note" name="note">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Modifier le commentaire" [(ngModel)]="assignment.remarque" name="remarque" value="nomAssignment">
+      <input matInput placeholder="Modifier le commentaire" [(ngModel)]="assignment.remarque" name="remarque">
     </mat-form-field>
     <mat-form-field>
       <input matInput [matDatepicker]="picker" placeholder="Edition de la date" [(ngModel)]="assignment.dateDeRendu" name="date">

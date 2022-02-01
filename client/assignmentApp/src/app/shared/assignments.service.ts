@@ -48,7 +48,7 @@ export class AssignmentsService {
 	}
 
 	getMatieres (): Observable<Matiere[]> {
-		return this.http.get<Matiere[]> (this.url)
+		return this.http.get<Matiere[]> (url + "api/matiere")
 	}
 
 	getAssignmentByID(id: number): Observable<Assignment | undefined> {
