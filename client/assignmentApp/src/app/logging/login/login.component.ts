@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
+import { User } from 'src/app/shared/user.model';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +9,9 @@ import { AuthService } from 'src/app/shared/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  pseudo?: String;
-  password?: String;
+  pseudo?: string;
+  password?: string;
+  user?: User;
 
   constructor(
     private route: ActivatedRoute,
@@ -17,9 +19,15 @@ export class LoginComponent implements OnInit {
     private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.logging ();
   }
 
   login () {
-    console.log (this.pseudo, this.password)
+    if (this.pseudo && this.password) {
+      //const salt = bcrypt.genSaltSync(10);
+      
+      //bcrypt.hashSync(this.password, salt),
+      this.authService.log (this.pseudo, this.password)
+    }
   }
 }

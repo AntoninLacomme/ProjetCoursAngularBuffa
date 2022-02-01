@@ -2,6 +2,7 @@ let express = require('express');
 let app = express();
 let bodyParser = require('body-parser');
 let assignment = require('./routes/assignments');
+let user = require ("./routes/user");
 
 let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
@@ -30,11 +31,11 @@ mongoose.connect(uri, options)
     });
 
 // Pour accepter les connexions cross-domain (CORS)
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    next();
 });
 
 // Pour les formulaires
@@ -55,6 +56,17 @@ app.route(prefix + '/assignments/:id')
   .get(assignment.getAssignment)
   .delete(assignment.deleteAssignment);
 
+// app.get(prefix + "/user", (req, res) => {
+//   user.getUser (req, res);
+// })
+// app.post (prefix + "/user", (req, res) => {
+//   console.log ("POST RECEIVED")
+//   user.postUser (req, res);
+// })
+
+app.route (prefix + "/user")
+  .get (user.getUser)
+  .post (user.postUser)
 
 // On démarre le serveur
 app.listen(port, "0.0.0.0");

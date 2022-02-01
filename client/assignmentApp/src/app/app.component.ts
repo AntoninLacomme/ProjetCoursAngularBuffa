@@ -9,11 +9,26 @@ import { AuthService } from './shared/auth.service';
 })
 export class AppComponent {
   title = "Application de gestion des devoirs à rendre !"
+  pseudo? = "";
 
-  constructor (private authService:AuthService, private router:Router) {}
+  constructor (private authService:AuthService, private router:Router) {
+  }
 
-  login () {
-    if (this.authService.loggedIn) {this.authService.logOut (); this.router.navigate (["/home"])} 
-    else {this.authService.logIn ()}
+  ngOnInit () {
+    this.authService.logging ();
+  }
+
+  logging () {
+    this.pseudo = this.authService.pseudo?.toString ();
+    return this.authService.loggedIn;
+  }
+
+  logout () {
+    this.authService.logOut ();
+    this.authService.logging ();
+  }
+
+  register () {
+    this.router.navigate (["logging/register"]);
   }
 }

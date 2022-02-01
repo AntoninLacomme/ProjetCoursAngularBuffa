@@ -22,7 +22,8 @@ export class AssignmentDetailComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.getAssignment ()
+    this.getAssignment ();
+    this.authService.logging ();
   }
 
   getAssignment () {

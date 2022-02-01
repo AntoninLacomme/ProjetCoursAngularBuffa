@@ -1,8 +1,15 @@
 <nav>
-    <a routerLink="/home">
+    <div *ngIf="logging(); else noconnect">
+        <a routerLink="/home">
+            <h1>{{title}}</h1>
+        </a>
+        <div>Bienvenue {{pseudo}}</div>
+        <button mat-raised-button color="primary" (click)="logout()">Déconnexion</button>
+    </div>
+    <ng-template #noconnect>
         <h1>{{title}}</h1>
-    </a>
-    <mat-slide-toggle color="primary" (click)="login()">Connexion en temps qu'admin</mat-slide-toggle>
+        <button mat-raised-button color="primary" (click)="register()">S'inscrire</button>
+    </ng-template>
 </nav>
 
 <router-outlet></router-outlet>

@@ -4,15 +4,17 @@ import { catchError, Observable, of } from 'rxjs'
 import { Assignment } from '../assignments/assignment.model';
 import { LoggingService } from './logging.service';
 import { map, tap } from 'rxjs';
-import { bdInitialAssignments } from './data';
+import { url } from './data';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class AssignmentsService {
-	url = "http://127.0.0.1:8010/api/assignments"
+	url = "api/assignments"
 
-	constructor(private loggingService: LoggingService, private http:HttpClient) { }
+	constructor(private loggingService: LoggingService, private http:HttpClient) { 
+		this.url = url + this.url;
+	}
 
 	peuplerBD () {
 	// 	bdInitialAssignments.forEach (a => {

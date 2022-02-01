@@ -27,7 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatSelectModule } from '@angular/material/select';
 import { LoginComponent } from './logging/login/login.component';
-import { LogoutComponent } from './logging/logout/logout.component';
+import { RegisterComponent } from './logging/register/register.component';
 
 const routes:Routes = [
   {path: "", component: AssignmentsComponent},
@@ -35,7 +35,8 @@ const routes:Routes = [
   {path: "add", component: AddAssignmentComponent},
   {path: "assignment/:id", component: AssignmentDetailComponent},
   {path: "assignment/:id/edit", component: EditAssignmentComponent, canActivate: [AuthGuard]},
-  {path: "logging/login", component: LoginComponent}
+  {path: "logging/login", component: LoginComponent},
+  {path: "logging/register", component: RegisterComponent}
 ]
 
 @NgModule({
@@ -47,7 +48,7 @@ const routes:Routes = [
     AddAssignmentComponent,
     EditAssignmentComponent,
     LoginComponent,
-    LogoutComponent
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

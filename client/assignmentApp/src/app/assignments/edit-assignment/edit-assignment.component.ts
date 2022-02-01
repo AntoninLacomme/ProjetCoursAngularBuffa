@@ -55,10 +55,7 @@ export class EditAssignmentComponent implements OnInit {
   ngOnInit(): void {
     this.getAssignment();
 
-    console.log ("Query params :");
-    console.log (this.route.snapshot.queryParams);
-    console.log ("Fragment d'url");
-    console.log (this.route.snapshot.fragment)
+    this.authService.logging ();
   }
   getAssignment() {
     // on récupère l'id dans le snapshot passé par le routeur
