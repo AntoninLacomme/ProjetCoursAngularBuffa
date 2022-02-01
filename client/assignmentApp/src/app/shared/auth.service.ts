@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/user.service';
-import * as bcrypt from "bcryptjs";
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +37,6 @@ export class AuthService {
   log (pseudo: String, passwordNotHash: string) {
     this.pseudo = pseudo;
     this.userService.getUser (pseudo, passwordNotHash).subscribe (answer => {
-      console.log ("LOGGING", answer)
       if (answer) {
         if (answer) { this.loggedIn = true; }
         

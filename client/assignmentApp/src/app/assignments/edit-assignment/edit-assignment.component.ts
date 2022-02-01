@@ -52,7 +52,7 @@ export class EditAssignmentComponent implements OnInit {
         .subscribe(message => {
           console.log(message);
 
-          // this.router.navigate (["/home"])
+          this.router.navigate (["/home"])
         });
 
       // navigation vers la home page
