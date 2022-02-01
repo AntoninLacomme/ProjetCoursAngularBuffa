@@ -8,4 +8,4 @@ let MatiereSchema = Schema({
 });
 
 // C'est à travers ce modèle Mongoose qu'on pourra faire le CRUD
-module.exports = mongoose.model('User', MatiereSchema);
+module.exports = mongoose.model('Matiere', MatiereSchema);
