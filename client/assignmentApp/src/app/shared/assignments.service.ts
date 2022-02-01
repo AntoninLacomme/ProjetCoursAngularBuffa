@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs'
 import { Assignment } from '../assignments/assignment.model';
+import { Matiere } from '../assignments/matiere.model';
 import { LoggingService } from './logging.service';
 import { map, tap } from 'rxjs';
 import { url } from './data';
@@ -11,6 +12,8 @@ import { url } from './data';
 })
 export class AssignmentsService {
 	url = "api/assignments"
+	limit = 20
+	skip = 0
 
 	constructor(private loggingService: LoggingService, private http:HttpClient) { 
 		this.url = url + this.url;
@@ -36,9 +39,19 @@ export class AssignmentsService {
 	// 			})
 	// 	})
 	}
+
+	nextAssignments (): Observable<Assignment[]> {
+		let result = this.http.get<Assignment[]> (this.url + "?limit=" + this.limit + "&skip=" + this.skip);
+		this.skip += this.limit;
+		return result;
+	}
 	
 	getAssignments (): Observable<Assignment[]> {
-		return this.http.get<Assignment[]>(this.url)
+		return this.http.get<Assignment[]> (this.url)
+	}
+
+	getMatieres (): Observable<Matiere[]> {
+		return this.http.get<Matiere[]> (this.url)
 	}
 
 	getAssignmentByID(id: number): Observable<Assignment | undefined> {

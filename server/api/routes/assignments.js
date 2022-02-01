@@ -2,7 +2,9 @@ let Assignment = require('../model/assignment');
 
 // Récupérer tous les assignments (GET)
 function getAssignments(req, res){
-    Assignment.find((err, assignments) => {
+    let limite = (req.query["limit"] !== undefined) ? parseInt(req.query["limit"]) : 50;
+    let skip = (req.query["skip"] !== undefined) ? parseInt(req.query["skip"]) : 0;
+    Assignment.find({}, null, { skip: skip, limit: limite }, (err, assignments) => {
         if(err){
             res.send(err)
         }

@@ -66,3 +66,5 @@ readFile ("./MOCK_DATA_2.json", (data) => {
     })
     writeFile ("./MOCK_DATA_PARSED.json", JSON.stringify (data_parsed, null, 0))
 })
+
+// writeFile ("./MATIERE.json", JSON.stringify (matieres, null, 0))

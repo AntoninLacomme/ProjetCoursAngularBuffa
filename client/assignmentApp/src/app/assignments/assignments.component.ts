@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignment.model';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { HostListener } from '@angular/core';
 
 @Component({
 	selector: 'app-assignments',
@@ -19,16 +20,27 @@ export class AssignmentsComponent implements OnInit {
 
 	ngOnInit(): void {
 		// appel au service pour récupérer les assignments
-		this.assigmentsService.getAssignments ()
-			.subscribe (assignments => {
-				this.assignments = assignments
-				this.assignments.forEach (assignment => {
+		this.addNewAssignments ();
+	}
+
+	addNewAssignments (): void {
+		this.assigmentsService.nextAssignments ()
+		.subscribe (assignments => {
+			//this.assignments = [...this.assignments, ...assignments]
+			if (assignments.length > 0) {
+				assignments.forEach (assignment => {
 					assignment.rendu ?
 						this.assignmentsRendus.push (assignment) :
 						this.assignmentsNonRendus.push (assignment)
 				})
-			})
 
+				// setTimeout (() => {
+				// 	this.addNewAssignments ();
+				// }, 500)
+			} else {
+
+			}
+		})
 	}
 
 	assignmentClique (assignment: Assignment) {
@@ -59,6 +71,7 @@ export class AssignmentsComponent implements OnInit {
 	}
 
 	drop(event: CdkDragDrop<Assignment[]>) {
+		console.log (event)
 		if (event.previousContainer === event.container) {
 		  	moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
 		} else {
@@ -70,4 +83,5 @@ export class AssignmentsComponent implements OnInit {
 			);
 		}
 	}
+
 }
