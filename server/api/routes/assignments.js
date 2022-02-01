@@ -68,6 +68,13 @@ function deleteAssignment(req, res) {
     })
 }
 
+function countAssignment (req, res) {
+    Assignment.countDocuments({}, (err, count) => {
+        if (err) { res.send (err) }
+        res.send ({count: count})
+    })
+}
 
 
-module.exports = { getAssignments, postAssignment, getAssignment, updateAssignment, deleteAssignment };
+
+module.exports = { getAssignments, postAssignment, getAssignment, updateAssignment, deleteAssignment, countAssignment};

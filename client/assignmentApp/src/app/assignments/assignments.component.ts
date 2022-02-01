@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { AssignmentsService } from '../shared/assignments.service';
 import { Assignment } from './assignment.model';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { HostListener } from '@angular/core';
+import { NumberInput } from '@angular/cdk/coercion';
 
 @Component({
 	selector: 'app-assignments',
@@ -14,17 +16,44 @@ export class AssignmentsComponent implements OnInit {
 	assignmentsRendus:Assignment[] = []
 	assignmentsNonRendus:Assignment[] = []
 	assignmentSelectionne?:Assignment
+	countAssignments:NumberInput = 100
+
+	//@ViewChild(MatPaginator) paginator: MatPaginator;
 
 	constructor(private assigmentsService: AssignmentsService) {
 	}
 
+	handlePage(e: PageEvent):void {
+		this.assigmentsService.nextAssignments (e.pageSize, e.pageIndex * e.pageSize)
+			.subscribe (assignments => {
+				//this.assignments = [...this.assignments, ...assignments]
+				if (assignments.length > 0) {
+					this.assignmentsNonRendus = [];
+					this.assignmentsRendus = [];
+					assignments.forEach (assignment => {
+						assignment.rendu ?
+							this.assignmentsRendus.push (assignment) :
+							this.assignmentsNonRendus.push (assignment)
+					})
+
+					// setTimeout (() => {
+					// 	this.addNewAssignments ();
+					// }, 500)
+				} else {
+
+				}
+			})
+	}
+	  
+
 	ngOnInit(): void {
 		// appel au service pour récupérer les assignments
 		this.addNewAssignments ();
+		this.countsAssignments ();
 	}
 
 	addNewAssignments (): void {
-		this.assigmentsService.nextAssignments ()
+		this.assigmentsService.nextAssignments (25, 0)
 		.subscribe (assignments => {
 			//this.assignments = [...this.assignments, ...assignments]
 			if (assignments.length > 0) {
@@ -41,6 +70,16 @@ export class AssignmentsComponent implements OnInit {
 
 			}
 		})
+	}
+
+	countsAssignments (): void {
+		this.assigmentsService.count ()
+			.subscribe (count => {
+				if (count) {
+					this.countAssignments = +count.count;
+					console.log (this.countAssignments)
+				}
+			})
 	}
 
 	assignmentClique (assignment: Assignment) {

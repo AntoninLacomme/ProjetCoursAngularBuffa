@@ -57,6 +57,9 @@ app.route(prefix + '/assignments/:id')
   .get(assignment.getAssignment)
   .delete(assignment.deleteAssignment);
 
+app.route(prefix + "/assignments/count/all")
+  .get (assignment.countAssignment)
+
 // app.get(prefix + "/user", (req, res) => {
 //   user.getUser (req, res);
 // })

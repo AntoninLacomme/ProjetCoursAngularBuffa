@@ -5,75 +5,87 @@
     </a>
     <button mat-flat-button color="accent" (click)="peuplerBD()">Peupler la BDD</button>
   </div>
-  <div class="full-container">
-    <div class="main-container" 
-      cdkDropList
-      #todoList="cdkDropList"
-      [cdkDropListData]="assignmentsNonRendus"
-      [cdkDropListConnectedTo]="[doneList]"
-      (cdkDropListDropped)="drop($event)"
-      #containerNonRendu>
-      <h3>Devoirs non rendus</h3>
-      <mat-list class="container-assignment" *ngFor="let assignment of assignmentsNonRendus" cdkDrag>
-        <div class="div-container-assignment">
-          <mat-card-title class="matiere-assignment flex-assignment">
-            <div><img class="icon" src="./assets/pictures/{{assignment.imageMatiere}}" alt=""></div>
-            <div>{{assignment.nomMatiere}}</div>
-            <div><img class="icon" src="./assets/pictures/{{assignment.photoProf}}" alt=""></div>
-          </mat-card-title>
+  <div>
+    <div class="full-container">
+      <div class="main-container" 
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="assignmentsNonRendus"
+        [cdkDropListConnectedTo]="[doneList]"
+        (cdkDropListDropped)="drop($event)"
+        #containerNonRendu>
+        <h3>Devoirs non rendus</h3>
+        <mat-list class="container-assignment" *ngFor="let assignment of assignmentsNonRendus" cdkDrag>
+          <div class="div-container-assignment">
+            <mat-card-title class="matiere-assignment flex-assignment">
+              <div><img class="icon" src="./assets/pictures/{{assignment.imageMatiere}}" alt=""></div>
+              <div>{{assignment.nomMatiere}}</div>
+              <div><img class="icon" src="./assets/pictures/{{assignment.photoProf}}" alt=""></div>
+            </mat-card-title>
 
-          <div class="author-assignment flex-assignment">
-            <div>{{assignment.author}}</div>
-          </div>
+            <div class="author-assignment flex-assignment">
+              <div>{{assignment.author}}</div>
+            </div>
 
-          <div class="">
-            <div *ngIf="!assignment.rendu">
-              <div class="assignment-soumission">En attente de soumission</div>
+            <div class="">
+              <div *ngIf="!assignment.rendu">
+                <div class="assignment-soumission">En attente de soumission</div>
+              </div>
+            </div>
+
+            <div>            
+            <a routerLink="/assignment/{{assignment.id}}">
+              <button mat-flat-button color="accent">Visualiser</button>
+            </a>
             </div>
           </div>
+        </mat-list>
+      </div>
 
-          <div>            
-          <a routerLink="/assignment/{{assignment.id}}">
-            <button mat-flat-button color="accent">Visualiser</button>
-          </a>
-          </div>
-        </div>
-      </mat-list>
-    </div>
+      <div class="main-container"
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="assignmentsRendus"
+        [cdkDropListConnectedTo]="[todoList]"
+        (cdkDropListDropped)="drop($event)"
+        #containerRendu>
+        <h3>Devoirs rendus</h3>
+        <mat-list class="container-assignment" *ngFor="let assignment of assignmentsRendus" cdkDrag>
+          <div class="div-container-assignment">
+            <mat-card-title class="matiere-assignment flex-assignment">
+              <div><img class="icon" src="./assets/pictures/{{assignment.imageMatiere}}" alt=""></div>
+              <div>{{assignment.nomMatiere}}</div>
+              <div><img class="icon" src="./assets/pictures/{{assignment.photoProf}}" alt=""></div>
+            </mat-card-title>
 
-    <div class="main-container"
-      cdkDropList
-      #doneList="cdkDropList"
-      [cdkDropListData]="assignmentsRendus"
-      [cdkDropListConnectedTo]="[todoList]"
-      (cdkDropListDropped)="drop($event)"
-      #containerRendu>
-      <h3>Devoirs rendus</h3>
-      <mat-list class="container-assignment" *ngFor="let assignment of assignmentsRendus" cdkDrag>
-        <div class="div-container-assignment">
-          <mat-card-title class="matiere-assignment flex-assignment">
-            <div><img class="icon" src="./assets/pictures/{{assignment.imageMatiere}}" alt=""></div>
-            <div>{{assignment.nomMatiere}}</div>
-            <div><img class="icon" src="./assets/pictures/{{assignment.photoProf}}" alt=""></div>
-          </mat-card-title>
+            <div class="author-assignment flex-assignment">
+              <div>{{assignment.author}}</div>
+            </div>
 
-          <div class="author-assignment flex-assignment">
-            <div>{{assignment.author}}</div>
-          </div>
+            <div class="">
+              <div *ngIf="!assignment.rendu">
+                <div class="assignment-soumission">En attente de soumission</div>
+              </div>
+            </div>
 
-          <div class="">
-            <div *ngIf="!assignment.rendu">
-              <div class="assignment-soumission">En attente de soumission</div>
+            <div>            
+            <a routerLink="/assignment/{{assignment.id}}">
+              <button mat-flat-button color="accent">Visualiser</button>
+            </a>
             </div>
           </div>
+        </mat-list>
 
-          <div>            
-          <a routerLink="/assignment/{{assignment.id}}">
-            <button mat-flat-button color="accent">Visualiser</button>
-          </a>
-          </div>
-        </div>
-      </mat-list>
+      </div>
     </div>
+    <mat-paginator 
+        class="panigator"
+        #paginator
+        [length]="countAssignments"
+        [pageSize]="25"
+        [pageSizeOptions]="[10, 25, 50, 100]"
+        (page)="handlePage($event)"
+        aria-label="Select page">
+    </mat-paginator>
   </div>
 </main>

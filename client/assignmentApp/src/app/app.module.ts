@@ -28,6 +28,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatSelectModule } from '@angular/material/select';
 import { LoginComponent } from './logging/login/login.component';
 import { RegisterComponent } from './logging/register/register.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const routes:Routes = [
   {path: "", component: AssignmentsComponent},
@@ -60,6 +61,7 @@ const routes:Routes = [
     MatDividerModule,
     FormsModule,
     MatFormFieldModule,
+    MatPaginatorModule,
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
