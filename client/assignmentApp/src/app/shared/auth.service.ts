@@ -50,6 +50,8 @@ export class AuthService {
   register (pseudo: String, passwordHash: String) {
     this.userService.postUser (pseudo, passwordHash).subscribe (mess => { 
       if (mess.saved) {
+        this.loggedIn = true;
+        this.pseudo = pseudo;
         this.router.navigate (["home"]);
       }
     });

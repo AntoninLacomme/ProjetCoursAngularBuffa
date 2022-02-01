@@ -30,4 +30,8 @@ export class LoginComponent implements OnInit {
       this.authService.log (this.pseudo, this.password)
     }
   }
+
+  register () {
+    this.router.navigate (["/logging/register"]);
+  }
 }

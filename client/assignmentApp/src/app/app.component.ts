@@ -27,8 +27,4 @@ export class AppComponent {
     this.authService.logOut ();
     this.authService.logging ();
   }
-
-  register () {
-    this.router.navigate (["logging/register"]);
-  }
 }
