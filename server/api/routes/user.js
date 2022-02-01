@@ -1,14 +1,20 @@
+const bcrypt = require('bcryptjs');
 let User = require('../model/user');
 
 // Récupérer tous les assignments (GET)
 function getUser (req, res) {
+    console.log (req.query);
     let name = req.query.name;
+    let password = req.query.password;
     
     User.findOne({name: name}, (err, user) => {
         if(err){
             res.send(err)
         }
-        res.send(user);
+
+        bcrypt.compare (password, user.password, (err, resultat) => {
+            res.send(resultat);
+        })
     });
 }
 

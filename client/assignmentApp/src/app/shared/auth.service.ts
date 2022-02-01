@@ -38,9 +38,11 @@ export class AuthService {
 
   log (pseudo: String, passwordNotHash: string) {
     this.pseudo = pseudo;
-    this.userService.getUser (pseudo).subscribe (user => {
-      if (user && user.password) {
-        this.loggedIn = bcrypt.compareSync (passwordNotHash, user.password.toString ())
+    this.userService.getUser (pseudo, passwordNotHash).subscribe (answer => {
+      console.log ("LOGGING", answer)
+      if (answer) {
+        if (answer) { this.loggedIn = true; }
+        
         if (this.loggedIn) {
           this.router.navigate (["home"]);
         }

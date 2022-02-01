@@ -16,8 +16,8 @@ export class UserService {
     this.url = url + this.url;
    }
 
-  getUser (name: String): Observable<User | undefined> {
-    return this.http.get<User> (this.url + "?name=" + name);
+  getUser (name: String, passwordNotHash: String): Observable<User | undefined> {
+    return this.http.get<User> (this.url + "?name=" + name + "&password=" + passwordNotHash);
   }
 
   postUser (pseudo: String, password: String): Observable<any> {
